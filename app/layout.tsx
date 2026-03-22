@@ -1,6 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+import { Geist, Geist_Mono } from "next/font/google";
+
+import type { Metadata } from "next";
+import { ThemeProvider } from "./components/providers/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,8 +29,72 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <style id="theme-base">
+          {`
+            /* Light mode (default) */
+            :root {
+              --bg-primary: #ffffff;
+              --bg-secondary: #f8fafc;
+              --text-primary: #0f172a;
+              --text-secondary: #64748b;
+              --border-color: #e2e8f0;
+            }
+            
+            /* Dark mode - apply when html has dark class */
+            html.dark {
+              --bg-primary: #0f172a;
+              --bg-secondary: #1e293b;
+              --text-primary: #f1f5f9;
+              --text-secondary: #cbd5e1;
+              --border-color: #475569;
+            }
+            
+            /* Apply theme colors to main elements */
+            main {
+              background-color: var(--bg-primary);
+              color: var(--text-primary);
+            }
+            
+            /* Force gradients to respect theme */
+            html.dark main {
+              background: linear-gradient(to bottom right, #0f172a, #1e293b);
+            }
+          `}
+        </style>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('archlens-theme');
+                  console.log('[Init Script] localStorage archlens-theme:', theme);
+                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {
+                  console.error('[Init Script] Error:', e);
+                }
+              })();
+              
+              // Watch for dark class changes
+              const observer = new MutationObserver(() => {
+                console.log('[Observer] Detected class change');
+              });
+              observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
