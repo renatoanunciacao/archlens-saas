@@ -93,7 +93,7 @@ export function AnalysisJobTracker({
   if (!jobStatus) {
     return (
       <div className="space-y-4">
-        <div className="bg-slate-100 dark:bg-slate-800 animate-pulse h-64 rounded-xl"></div>
+        <div className="bg-slate-100 animate-pulse h-64 rounded-xl"></div>
       </div>
     );
   }
@@ -127,18 +127,18 @@ export function AnalysisJobTracker({
       {/* Progress Bar */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+          <h3 className="text-lg font-semibold text-slate-900">
             Progresso: {jobStatus.progress}%
           </h3>
           <span
             className={`px-3 py-1 rounded-full text-sm font-bold ${
               jobStatus.status === 'completed'
-                ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/30'
+                ? 'text-green-600 bg-green-50'
                 : jobStatus.status === 'failed'
-                  ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/30'
+                  ? 'text-red-600 bg-red-50'
                   : jobStatus.status === 'processing'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30'
-                    : 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-950/30'
+                    ? 'text-blue-600 bg-blue-50'
+                    : 'text-yellow-600 bg-yellow-50'
             }`}
           >
             {jobStatus.status === 'processing' && '⏳ Processando'}

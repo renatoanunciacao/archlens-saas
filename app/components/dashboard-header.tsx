@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { LogoutButton } from "./auth/logout-button";
-import { ThemeToggle } from "./theme-toggle";
 import { usePathname } from "next/navigation";
 
 interface DashboardHeaderProps {
@@ -33,9 +32,7 @@ export function DashboardHeader({
       >
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg blur-sm group-hover:blur-md opacity-60 group-hover:opacity-100 transition-all duration-300"></div>
-          <div className="relative bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg p-2 text-white text-xl font-black">
-            🔍
-          </div>
+          
         </div>
         <div className="hidden sm:block">
           <h1 className="text-2xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 dark:from-blue-400 dark:via-blue-200 dark:to-cyan-300 bg-clip-text text-transparent">
@@ -112,9 +109,8 @@ export function DashboardHeader({
           );
         })}
 
-        <div className="inline-block border-l border-slate-300 dark:border-slate-600 h-6 mx-1"></div>
+        <div className="inline-block border-l border-slate-300 h-6 mx-1"></div>
 
-        <ThemeToggle />
         <LogoutButton />
       </div>
     </div>

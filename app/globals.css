@@ -6,19 +6,8 @@
   color-scheme: light;
 }
 
-html.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  color-scheme: dark;
-}
-
-* {
-  color: var(--foreground);
-}
-
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans, system-ui, -apple-system, sans-serif);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }

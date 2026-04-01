@@ -11,7 +11,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
@@ -35,7 +35,7 @@ export default async function Home() {
           </div>
 
           {/* Description */}
-          <p className="text-lg max-w-lg mx-auto leading-relaxed" style={{ color: 'var(--foreground)' }}>
+          <p className="text-lg text-slate-600 max-w-lg mx-auto leading-relaxed">
             Com ArchLens, você pode visualizar, analisar e identificar e melhorar a qualidade da arquitetura do seu projeto com inteligência artificial. Identifique problemas antes que virem débito técnico.
           </p>
 
@@ -65,35 +65,35 @@ export default async function Home() {
           <div id="features" className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-12">
             <div className="group relative h-full">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-0 group-hover:opacity-20 transition duration-300"></div>
-              <div className="relative rounded-xl border border-blue-200/50 backdrop-blur-xl p-6 hover:border-blue-400/50 transition-all text-left h-full flex flex-col" style={{ backgroundColor: 'color-mix(in srgb, var(--background) 95%, #3b82f6 5%)' }}>
+              <div className="relative rounded-xl border border-blue-200/50 bg-white/80 backdrop-blur-xl p-6 hover:border-blue-400/50 transition-all text-left h-full flex flex-col">
                 <div className="text-3xl mb-3">📊</div>
-                <h3 className="font-bold mb-2 text-lg" style={{ color: 'var(--foreground)' }}>Análises Profundas</h3>
-                <p className="text-sm" style={{ color: 'var(--foreground)' }}>Avaliação automática de saúde da arquitetura</p>
+                <h3 className="font-bold text-slate-900 mb-2 text-lg">Análises Profundas</h3>
+                <p className="text-sm text-slate-600">Avaliação automática de saúde da arquitetura</p>
               </div>
             </div>
 
             <div className="group relative h-full">
               <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-500 rounded-xl blur opacity-0 group-hover:opacity-20 transition duration-300"></div>
-              <div className="relative rounded-xl border border-red-200/50 backdrop-blur-xl p-6 hover:border-red-400/50 transition-all text-left h-full flex flex-col" style={{ backgroundColor: 'color-mix(in srgb, var(--background) 95%, #ef4444 5%)' }}>
+              <div className="relative rounded-xl border border-red-200/50 bg-white/80 backdrop-blur-xl p-6 hover:border-red-400/50 transition-all text-left h-full flex flex-col">
                 <div className="text-3xl mb-3">🎯</div>
-                <h3 className="font-bold mb-2 text-lg" style={{ color: 'var(--foreground)' }}>Detecção de Problemas</h3>
-                <p className="text-sm" style={{ color: 'var(--foreground)' }}>Identifique padrões ruins, dependências circulares e problemas de design</p>
+                <h3 className="font-bold text-slate-900 mb-2 text-lg">Detecção de Problemas</h3>
+                <p className="text-sm text-slate-600">Identifique padrões ruins, dependências circulares e problemas de design</p>
               </div>
             </div>
 
             <div className="group relative h-full">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl blur opacity-0 group-hover:opacity-20 transition duration-300"></div>
-              <div className="relative rounded-xl border border-purple-200/50 backdrop-blur-xl p-6 hover:border-purple-400/50 transition-all text-left h-full flex flex-col" style={{ backgroundColor: 'color-mix(in srgb, var(--background) 95%, #a855f7 5%)' }}>
+              <div className="relative rounded-xl border border-purple-200/50 bg-white/80 backdrop-blur-xl p-6 hover:border-purple-400/50 transition-all text-left h-full flex flex-col">
                 <div className="text-3xl mb-3">📈</div>
-                <h3 className="font-bold mb-2 text-lg" style={{ color: 'var(--foreground)' }}>Acompanhamento de Trend</h3>
-                <p className="text-sm" style={{ color: 'var(--foreground)' }}>Monitore a evolução da qualidade da sua arquitetura ao longo do tempo</p>
+                <h3 className="font-bold text-slate-900 mb-2 text-lg">Acompanhamento de Trend</h3>
+                <p className="text-sm text-slate-600">Monitore a evolução da qualidade da sua arquitetura ao longo do tempo</p>
               </div>
             </div>
           </div>
 
           {/* Footer Text */}
-          <div className="pt-8" style={{ borderTopColor: 'var(--border-color)', borderTopWidth: '1px' }}>
-            <p className="text-sm" style={{ color: 'var(--foreground)' }}>
+          <div className="pt-8 border-t border-slate-200/50">
+            <p className="text-sm text-slate-500">
               Conecte seus repositórios GitHub e comece a analisar arquitetura em segundos
             </p>
           </div>
