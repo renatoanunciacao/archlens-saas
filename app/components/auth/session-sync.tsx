@@ -1,14 +1,7 @@
 "use client";
 
-import { useAppStore } from "../../stores/app-store";
 import { useEffect } from "react";
-
-type AppUser = {
-  id: string;
-  name?: string | null;
-  email?: string | null;
-  image?: string | null;
-} | null;
+import { useAppStore, type AppUser } from "../../stores/app-store";
 
 type Props = {
   user: AppUser;

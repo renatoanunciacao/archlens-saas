@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type AppUser = {
+export type AppUser = {
   id: string;
   name?: string | null;
   email?: string | null;
@@ -9,16 +9,14 @@ type AppUser = {
 
 type AppState = {
   user: AppUser;
+  selectedProjectId: string | null;
+  sidebarOpen: boolean;
   setUser: (user: AppUser) => void;
   setSelectedProjectId: (projectId: string | null) => void;
   setSidebarOpen: (open: boolean) => void;
-    selectedProjectId: string | null;
-  sidebarOpen: boolean;
 };
 
-
-
-export const useAppStore = create<AppState>((set) => ({
+export const useAppStore = create<AppState>()((set) => ({
   user: null,
   selectedProjectId: null,
   sidebarOpen: true,
