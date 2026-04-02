@@ -7,16 +7,18 @@ type AppUser = {
   image?: string | null;
 } | null;
 
-type AppStore = {
+type AppState = {
   user: AppUser;
-  selectedProjectId: string | null;
-  sidebarOpen: boolean;
   setUser: (user: AppUser) => void;
   setSelectedProjectId: (projectId: string | null) => void;
   setSidebarOpen: (open: boolean) => void;
+    selectedProjectId: string | null;
+  sidebarOpen: boolean;
 };
 
-export const useAppStore = create<AppStore>((set) => ({
+
+
+export const useAppStore = create<AppState>((set) => ({
   user: null,
   selectedProjectId: null,
   sidebarOpen: true,

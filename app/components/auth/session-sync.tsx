@@ -3,13 +3,15 @@
 import { useAppStore } from "../../stores/app-store";
 import { useEffect } from "react";
 
+type AppUser = {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+} | null;
+
 type Props = {
-  user: {
-    id: string;
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-  } | null;
+  user: AppUser;
 };
 
 export function SessionSync({ user }: Props) {
