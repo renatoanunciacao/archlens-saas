@@ -64,6 +64,7 @@ export function HealthTrendChart({ data, projectName }: HealthTrendChartProps) {
               }}
               labelStyle={{ color: "rgb(226, 232, 240)" }}
               formatter={(value: number) => [`${value}/100`, "Score"]}
+              
             />
             <Legend wrapperStyle={{ color: "rgb(148, 163, 184)" }} />
             <Line
