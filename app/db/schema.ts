@@ -7,6 +7,7 @@ import {
   timestamp,
   uniqueIndex,
   uuid,
+  index
 } from "drizzle-orm/pg-core";
 
 import { sql } from "drizzle-orm";
@@ -140,8 +141,13 @@ export const analysisJobs = pgTable("analysis_jobs", {
   completedAt: timestamp("completed_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => ({
-  projectIdx: uniqueIndex("analysis_jobs_project_idx").on(table.projectId, table.status),
-  userIdx: uniqueIndex("analysis_jobs_user_pending_idx").on(table.userId),
+  projectIdx: uniqueIndex("analysis_jobs_project_idx").on(
+    table.projectId,
+    table.status
+  ),
+
+  userIdx: index("analysis_jobs_user_idx").on(table.userId)
+ 
 }));
 
 export const analysisJobProgress = pgTable("analysis_job_progress", {

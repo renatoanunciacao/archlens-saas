@@ -5,7 +5,7 @@ import { authOptions } from '@/app/lib/auth';
 import { db } from '@/app/db';
 import { eq } from 'drizzle-orm';
 import { getServerSession } from 'next-auth';
-import { processAnalysisJob } from '@/app/lib/analysis-worker';
+
 
 export async function POST(request: NextRequest) {
   try {
@@ -58,9 +58,7 @@ export async function POST(request: NextRequest) {
 
     // Process job asynchronously (fire and forget)
     // In production, use a proper job queue (Bull, RabbitMQ, etc)
-    void processAnalysisJob(job.id as string).catch((err) => {
-      console.error(`Job ${job.id} failed:`, err);
-    });
+   
 
     return NextResponse.json(
       { jobId: job.id, message: 'Analysis queued successfully' },

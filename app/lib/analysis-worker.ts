@@ -3,7 +3,7 @@ import * as os from 'os';
 import * as path from 'path';
 
 import { analyses, analysisJobProgress, analysisJobs, projects } from '@/app/db/schema';
-import { desc, eq } from 'drizzle-orm';
+import { desc, eq, and } from 'drizzle-orm';
 
 import { db } from '@/app/db';
 import { execSync } from 'child_process';
@@ -58,13 +58,26 @@ export async function processAnalysisJob(jobId: string) {
   try {
     // Get job details
     const [job] = await db
-      .select()
-      .from(analysisJobs)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .where(eq(analysisJobs.id, jobId as any));
+      .update(analysisJobs)
+      .set({
+        status: 'processing',
+        startedAt: new Date(),
+      })
+      .where(
+        and(
+          eq(analysisJobs.id, jobId as any),
+          eq(analysisJobs.status, 'pending')
+        )
+      )
+      .returning();
 
     if (!job) {
-      throw new Error('Job not found');
+      console.log(`[Job ${jobId}] Already claimed or not found`);
+
+      return {
+        success: false,
+        reason: 'already_claimed_or_not_found',
+      };
     }
 
     // Get project details

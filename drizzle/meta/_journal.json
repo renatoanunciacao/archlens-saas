@@ -8,6 +8,20 @@
       "when": 1774076415265,
       "tag": "0000_burly_hiroim",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1787770672511,
+      "tag": "0001_tiny_nehzno",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787771010855,
+      "tag": "0002_nice_black_bolt",
+      "breakpoints": true
     }
   ]
 }
