@@ -27,3 +27,12 @@ jobs:
 
       - name: Buid application
         run: npm run build
+      
+      - name: Configure Aws Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::161958365524:role/GitHubActionsArchLensRole
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
