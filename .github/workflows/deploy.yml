@@ -40,3 +40,17 @@ jobs:
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t archlens:latest .
+
+      - name: Tag Docker image
+        run: |
+          docker tag archlens:latest \
+            161958365524:dkr.ecr.us-east-1.amazonaws.com/archlens:latest
+
+      - name: Push Docker image
+        run: |
+          docker push \
+            161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:latest
