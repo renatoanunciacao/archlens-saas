@@ -23,7 +23,7 @@ export default async function Home() {
           {/* Badge */}
           <div className="inline-block">
             <span className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
-              ✨ Análise Inteligente de Arquitetura
+              ✨ Análise Inteligente de Arquitetura na AWS
             </span>
           </div>
 
