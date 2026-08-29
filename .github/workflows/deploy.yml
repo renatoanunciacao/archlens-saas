@@ -54,3 +54,16 @@ jobs:
         run: |
           docker push \
             161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:latest
+
+      - name: Deploy to EC2 via SSM
+        run: |
+          aws ssm send-command \
+            --instance-ids "i-0bb23763a102c7075" \
+            --document-name "AWS-RunShellScript" \
+            --parameters 'commands=[
+              "docker pull 161958365524.dkr.erc.us-east-1.amazonaws.com/archlens:latest",
+              "docker stop archlens || true",
+              "docker rm archlens || true",
+              "docker run -d --name archlens -p 3000:3000 -e NEXTAUTH_SECRET=\"${{secrets.NEXTAUTH_SECRET}}\" -e NEXTAUTH_URL=\"${{secrets.NEXTAUTH_URL}}\" 161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:latest"
+             ]'\
+           --region us-east-1
