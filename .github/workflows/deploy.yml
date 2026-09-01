@@ -61,8 +61,7 @@ jobs:
             --instance-ids "i-0bb23763a102c7075" \
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
-              "if ! command -v docker >/dev/null 2>&1; then sudo dnf install -y docker; sudo systemctl enable docker; sudo systemctl start docker; fi",
-              "sudo systemctl start docker",
+              "aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 161958365524.dkr.ecr.us-east-1.amazonaws.com",
               "docker pull 161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:latest",
               "docker stop archlens || true",
               "docker rm archlens || true",
