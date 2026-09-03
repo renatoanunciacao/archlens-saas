@@ -21,9 +21,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show selected deployment
+      - name: Get deployment SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          echo "Rollback para o workflow run: ${{ inputs.run_id }}"
+          gh run view ${{ inputs.run_id }} \
+            --json databaseId,createdAt,headSha,displayTitle \
+            --jq '{
+              id: .databaseId,
+              date: .createdAt,
+              sha: .headSha,
+              commit: .displayTitle
+            }'
 
       - name: List successful deployments
         env:
