@@ -49,6 +49,14 @@ jobs:
             --image-ids imageTag="${{ steps.deployment.outputs.sha }}" \
             --region "$AWS_REGION"
 
+      - name: Test SSM connection
+        run: |
+          aws ssm send-command \
+            --instance-ids "i-0bb23763a102c7075" \
+            --document-name "AWS-RunShellScript" \
+            --parameters 'commands=["echo Rollback SSM connection OK"]' \
+            --region us-east-1
+
       - name: List successful deployments
         env:
           GH_TOKEN: ${{ github.token }}
