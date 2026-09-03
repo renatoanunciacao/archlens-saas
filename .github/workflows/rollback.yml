@@ -26,5 +26,5 @@ jobs:
               id: .databaseId,
               date: .createdAt,
               sha: .headSha,
-              commit: .headCommit.message
+              commit: .displayTitle
             }'
