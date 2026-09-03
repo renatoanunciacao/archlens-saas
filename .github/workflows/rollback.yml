@@ -30,8 +30,8 @@ jobs:
             --json headSha \
             --jq '.headSha')
 
-    echo "Selected SHA: $SHA"
-    echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Selected SHA: $SHA"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
 
       - name: List successful deployments
         env:
