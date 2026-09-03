@@ -21,7 +21,7 @@ jobs:
             --workflow deploy.yml \
             --status success \
             --limit 10 \
-            --json databaseId,createdAt,headSha,headCommit \
+            --json databaseId,createdAt,headSha,displayTitle \
             --jq '.[] | {
               id: .databaseId,
               date: .createdAt,
