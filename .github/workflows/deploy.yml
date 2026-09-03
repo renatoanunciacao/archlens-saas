@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  IMAGE_TAG: ${{ github.sha }}
+
 permissions:
   id-token: write
   contents: read
@@ -43,17 +46,17 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t archlens:latest .
+          docker build -t archlens:${{ github.sha }} .
 
       - name: Tag Docker image
         run: |
-          docker tag archlens:latest \
-            161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:latest
+          docker tag archlens:${{ github.sha }} \
+            161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:${{ IMAGE_TAG }}
 
       - name: Push Docker image
         run: |
           docker push \
-            161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:latest
+            161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:${{ IMAGE_TAG }}
 
       - name: Deploy to EC2 via SSM
         run: |
@@ -62,9 +65,9 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
               "aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 161958365524.dkr.ecr.us-east-1.amazonaws.com",
-              "docker pull 161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:latest",
+              "docker pull 161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:${{ IMAGE_TAG }}",
               "docker stop archlens || true",
               "docker rm archlens || true",
-              "docker run -d --name archlens -p 3000:3000 -e NEXTAUTH_SECRET=\"${{ secrets.NEXTAUTH_SECRET }}\" -e NEXTAUTH_URL=\"${{ secrets.NEXTAUTH_URL }}\" 161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:latest"
+              "docker run -d --name archlens -p 3000:3000 -e NEXTAUTH_SECRET=\"${{ secrets.NEXTAUTH_SECRET }}\" -e NEXTAUTH_URL=\"${{ secrets.NEXTAUTH_URL }}\" 161958365524.dkr.ecr.us-east-1.amazonaws.com/archlens:${{ IMAGE_TAG }}"
            ]' \
            --region us-east-1
