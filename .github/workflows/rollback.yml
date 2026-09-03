@@ -1,0 +1,30 @@
+name: ArchLens Rollback
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  actions: read
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: List successful deployments
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list \
+            --workflow deploy.yml \
+            --status success \
+            --limit 10 \
+            --json databaseId,createdAt,headSha,headCommit \
+            --jq '.[] | {
+              id: .databaseId,
+              date: .createdAt,
+              sha: .headSha,
+              commit: .headCommit.message
+            }'
