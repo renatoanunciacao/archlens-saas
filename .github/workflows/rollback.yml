@@ -33,6 +33,22 @@ jobs:
           echo "Selected SHA: $SHA"
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
 
+      - name: Configure Aws Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::161958365524:role/GitHubActionsArchLensRole
+          aws-region: us-east-1
+
+      - name: Verify image in ECR
+        env:
+          AWS_REGION: us-east-1
+          ECR_REPOSITORY: archlens
+        run: |
+          aws ecr describe-images \
+            --repository-name "$ECR_REPOSITORY" \
+            --image-ids imageTag="${{ steps.deployment.outputs.sha }}" \
+            --region "$AWS_REGION"
+
       - name: List successful deployments
         env:
           GH_TOKEN: ${{ github.token }}
